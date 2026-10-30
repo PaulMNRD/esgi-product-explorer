@@ -6,11 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -73,6 +77,8 @@ fun ProductDetailScreen(
                 .padding(top = 16.dp)
         )
 
+        ProductRating(rating = product.rating, modifier = Modifier.padding(top = 16.dp))
+
         Text(text = product.description)
 
         Button(onClick = onAddToCartClick) {
@@ -92,17 +98,6 @@ fun ProductHeader(
         Text(text = title, style = MaterialTheme.typography.headlineSmall)
         Text(text = brand, style = MaterialTheme.typography.titleMedium)
         Text(text = category, style = MaterialTheme.typography.bodyMedium)
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProductDetailScreenPreview() {
-    ProductExplorerTheme {
-        ProductDetailScreen(
-            product = sampleProduct(),
-            onAddToCartClick = {}
-        )
     }
 }
 
@@ -140,6 +135,33 @@ fun ProductImage(
     )
 }
 
+@Composable
+fun ProductRating(
+    rating: Double,
+    modifier: Modifier = Modifier
+) {
+    Row (modifier = modifier) {
+        Icon(
+            imageVector = Icons.Default.Star,
+            contentDescription = "Note du produit"
+        )
+        Text(
+            text = "$rating / 5",
+            modifier = Modifier.padding(start = 8.dp)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProductDetailScreenPreview() {
+    ProductExplorerTheme {
+        ProductDetailScreen(
+            product = sampleProduct(),
+            onAddToCartClick = {}
+        )
+    }
+}
 
 data class ProductUi(
     val title: String,
