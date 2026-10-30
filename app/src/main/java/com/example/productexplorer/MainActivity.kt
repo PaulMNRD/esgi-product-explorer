@@ -17,13 +17,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProductExplorerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ProductHomeScreen(
-                        featuredProduct = sampleProduct(),
-                        onFeaturedProductClick = {
-                            // TODO: open product details later
+                    ProductCatalogScreen(
+                        products = sampleProducts(),
+                        onProductClick = {
+                            // TODO: Open product detail later
                         },
                         modifier = Modifier.padding(innerPadding)
                     )
+
                 }
             }
         }
