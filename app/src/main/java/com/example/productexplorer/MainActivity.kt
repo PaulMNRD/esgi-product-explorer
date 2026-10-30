@@ -79,6 +79,14 @@ fun ProductDetailScreen(
 
         ProductRating(rating = product.rating, modifier = Modifier.padding(top = 16.dp))
 
+        ProductAvailabilityCard(
+            stock = product.stock,
+            shippingInformation = product.shippingInformation,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+        )
+
         Text(text = product.description)
 
         Button(onClick = onAddToCartClick) {
@@ -149,6 +157,32 @@ fun ProductRating(
             text = "$rating / 5",
             modifier = Modifier.padding(start = 8.dp)
         )
+    }
+}
+
+@Composable
+fun ProductAvailabilityCard(
+    stock: Int,
+    shippingInformation: String,
+    modifier: Modifier = Modifier
+) {
+    Card(modifier = modifier) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Disponibilité",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = "Stock : $stock unités",
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Text(
+                text = shippingInformation,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
     }
 }
 
