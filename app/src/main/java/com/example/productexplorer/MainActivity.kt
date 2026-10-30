@@ -69,6 +69,7 @@ fun ProductDetailScreen(
             price = product.price,
             discountPercentage = product.discountPercentage,
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = 16.dp)
         )
 
