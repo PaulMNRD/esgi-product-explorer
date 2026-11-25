@@ -149,8 +149,9 @@ fun CategoryChip(
 ) {
     Surface(
         modifier = modifier,
-        shape = MaterialTheme.shapes.medium,
-        tonalElevation = 2.dp
+        shape = MaterialTheme.shapes.extraLarge,
+        color = MaterialTheme.colorScheme.secondary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
     ) {
         Text(
             text = label,
