@@ -41,6 +41,9 @@ fun ProductCatalogScreen(
     var showOnlyInStock by rememberSaveable {
         mutableStateOf(false)
     }
+    var favoriteProductIds by rememberSaveable {
+        mutableStateOf(listOf<Int>())
+    }
 
     val filteredProducts = remember(products, searchQuery, showOnlyInStock) {
         products.filter { product ->
@@ -51,6 +54,14 @@ fun ProductCatalogScreen(
             val matchesStock =
                 !showOnlyInStock || product.stock > 0
             matchesSearch && matchesStock
+        }
+    }
+
+    fun toggleFavorite(productId: Int) {
+        favoriteProductIds = if (favoriteProductIds.contains(productId)) {
+            favoriteProductIds - productId
+        } else {
+            favoriteProductIds + productId
         }
     }
 
@@ -122,6 +133,8 @@ fun ProductCatalogScreen(
         ) { product ->
             ProductListItem(
                 product,
+                isFavorite = favoriteProductIds.contains(product.id),
+                onFavoriteClick = { toggleFavorite(product.id) },
                 onClick = { onProductClick(product) }
             )
         }
@@ -131,6 +144,8 @@ fun ProductCatalogScreen(
 @Composable
 fun ProductListItem(
     product: ProductUi,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -166,6 +181,15 @@ fun ProductListItem(
             Spacer(modifier = Modifier.height(8.dp))
             Button(onClick = onClick) {
                 Text(text = "Voir le produit")
+            }
+            Button(onClick = onFavoriteClick) {
+                Text(
+                    text = if (isFavorite) {
+                        "Retirer des favoris"
+                    } else {
+                        "Ajouter aux favoris"
+                    }
+                )
             }
         }
     }
