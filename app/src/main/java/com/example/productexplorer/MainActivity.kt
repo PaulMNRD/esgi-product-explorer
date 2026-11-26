@@ -18,14 +18,11 @@ class MainActivity : ComponentActivity() {
             ProductExplorerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     ProductCatalogContainer(
-                        products = sampleProducts(),
-                        categories = sampleCategories(),
                         onProductClick = {
                             // TODO: Open product detail later
                         },
                         modifier = Modifier.padding(innerPadding)
                     )
-
                 }
             }
         }
